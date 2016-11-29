@@ -1,0 +1,77 @@
+﻿<html>
+<head>
+<title>大转盘抽奖</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<link href="css/turnplate.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<!--转盘显示图片-->
+<img src="images/sorry.png" id="sorry" class="hide" />
+<img src="images/iphone.jpg" id="iphone" class="hide" />
+<!--转盘区域-->
+<div class="turntable">
+	<div class="turnplate">
+		<canvas id="wheelcanvas" width="422px" height="422px"></canvas>
+		<img class="pointer" src="images/turnplate-pointer.png"/>
+	</div>
+</div>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+<script type="text/javascript" src="jquery.rotate.js"></script>
+<script type="text/javascript" src="turnplate.js"></script>
+<script type="text/javascript">
+    var turnplateConfig = {
+        canvasID: "wheelcanvas",
+        awardList:[],               //大转盘奖品名称
+        awardColor:"#E5302F",       //大转盘奖项文字颜色
+        turnplateRadius: 422,       //大转盘半径
+        outsideRadius:192,          //大转盘外圆的半径
+        insideRadius:68,            //大转盘内圆的半径
+        textRadius:155,             //大转盘奖品位置距离圆心的距离
+        startAngle: 0,               //开始角度
+        showAwardName: true,        //是否显示奖项名字
+        showAwardImg: true,         //是否显示奖项图片
+    }
+    turnplateConfig.awardList = [
+        {
+            title:"谢谢参与",
+            icon: 'sorry',
+            background:"#CCFFCC",
+            startAngel:0,
+            endAngel:90,
+        },
+        {
+            title:"三等奖",
+            name:"限量周边玩偶",
+            background:"#FFF4D6",
+            startAngel:90,
+            endAngel:180,
+        },
+        {
+            title:"二等奖",
+            name: "海尔洗衣机",
+            background:"#CCFFFF",
+            startAngel:180,
+            endAngel:270,
+        },
+        {
+            title: "一等奖",
+            name: "iPhone7 Plus",
+            icon:'iphone',
+            background:"#FFFFCC",
+            startAngel:270,
+            endAngel:360,
+        }
+    ];
+    var turnplate = new Turnplate(turnplateConfig);
+    turnplate.init();
+    
+    $('.pointer').click(function (){
+        turnplate.rotateFn(turnplateConfig.awardList[0],function(){
+            alert(turnplateConfig.awardList[0].title);
+        });
+    });
+
+</script>
+</body>
+</html>
